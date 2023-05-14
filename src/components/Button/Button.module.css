@@ -1,0 +1,22 @@
+button[name='submit'] {
+  background-color: rgba(0, 255, 115, .6);
+}
+
+button[name='reset'] {
+  background-color: rgba(255, 42, 42, 0.6);
+}
+
+
+button[name='submit']:focus,
+button[name='submit']:hover {
+  outline: transparent;
+  box-shadow: 0px 0px 10px 5px  rgba(0, 255, 115, 1);
+  background-color:  rgba(0, 255, 115, .9);
+}
+
+button[name='reset']:focus,
+button[name='reset']:hover  {
+  outline: transparent;
+  box-shadow: 0px 0px 10px 5px rgba(255, 0, 0, 1);
+  background-color:rgba(255, 0, 0, .9);
+}

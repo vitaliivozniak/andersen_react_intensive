@@ -15,6 +15,40 @@ input{
   transition: all .3s ease-in-out;
 }
 
+input[type='date']::-webkit-calendar-picker-indicator { 
+  display: block;
+  background-color: rgba(255, 255, 255, .45);
+  border-radius: 5px;
+  padding: 3px;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+input[type='date']::-webkit-datetime-edit-text, 
+input[type='date']::-webkit-datetime-edit-month-field,
+input[type='date']::-webkit-datetime-edit-day-field,
+input[type='date']::-webkit-datetime-edit-year-field { 
+  color: rgba(255, 255, 255, .45); 
+  text-transform: uppercase;
+  transition: all .3s ease-in-out;
+}
+
+input[type='date']:focus::-webkit-calendar-picker-indicator,
+input[type='date']:hover::-webkit-calendar-picker-indicator{
+  background-color: rgba(255, 255, 255, 1);
+}
+
+input[type='date']:focus::-webkit-datetime-edit-text, 
+input[type='date']:focus::-webkit-datetime-edit-month-field,
+input[type='date']:focus::-webkit-datetime-edit-day-field,
+input[type='date']:focus::-webkit-datetime-edit-year-field,
+input[type='date']:hover::-webkit-datetime-edit-text, 
+input[type='date']:hover::-webkit-datetime-edit-month-field,
+input[type='date']:hover::-webkit-datetime-edit-day-field,
+input[type='date']:hover::-webkit-datetime-edit-year-field {
+  color: rgba(255, 255, 255, 1);
+}
+
 input:hover::placeholder {
   color: #fff;
 }

@@ -1,0 +1,21 @@
+ul {
+  list-style: none;
+}
+
+.data_list {
+  padding: 20px 0 50px;
+}
+
+.data_list > li {
+  display: block;
+}
+
+.data_list > li:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.data_list_title {
+  color: rgba(255, 255, 255, .6);
+  display: inline-block;
+  margin-bottom: 5px;
+}
