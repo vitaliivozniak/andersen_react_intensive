@@ -29,9 +29,6 @@ h2{
   margin: 0 auto;
 }
 
-
-
-/* -------- */
 .buttons {
   display: flex;
   align-items: center;
@@ -51,8 +48,6 @@ h2{
 .buttons > button:not(:last-child) {
   margin-right: 15px;
 }
-
-
 
 
 .error {
