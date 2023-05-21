@@ -1,36 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import Button from './Button/Button';
 import FormResults from './FormResults';
 import Input from './Input/Input';
 import Textarea from './Textarea/Textarea';
+import './Form.css';
 import ERRORS from './Errors';
-import Button from './Button/Button';
 
-class Form extends Component {
-	constructor(props) {
-		super(props);
 
-		this.state = {
-			name: '',
-			lastName: '',
-			birthday: '',
-			phoneNumber: '',
-			site: '',
-			personalInfo: '',
-			technologyStack: '',
-			lastProjectDesc: '',
-			submit: false,
-			nameError: '',
-			lastNameError: '',
-			birthdayError: '',
-			phoneNumberError: '',
-			siteError: '',
-			personalInfoError: '',
-			technologyStackError: '',
-			lastProjectDescError: '',
-		}
-	}
+export default function Form() {
 
-	isValid = () => {
+	const [name, setName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [birthday, setBirthday] = useState('');
+	const [phoneNumber, setPhoneNumber] = useState('');
+	const [site, setSite] = useState('');
+	const [personalInfo, setPersonalInfo] = useState('');
+	const [technologyStack, setTechnologyStack] = useState('');
+	const [lastProjectDesc, setLastProjectDesc] = useState('');
+
+	const [nameError, setNameError] = useState('');
+	const [lastNameError, setLastNameError] = useState('');
+	const [birtdayError, setBirtdayError] = useState('');
+	const [phoneNumberError, setPhoneNumberError] = useState('');
+	const [siteError, setSiteError] = useState('');
+	const [personalInfoError, setPersonalInfoError] = useState('');
+	const [technologyStackError, setTechnologyStackError] = useState('');
+	const [lastProjectDescError, setLastProjectDescError] = useState('');
+
+	const [submitted, setSubmitted] = useState(false);
+	const [isFormValid, setIsFormValid] = useState(false);
+
+	function isValid() {
 		let nameErrorText = '';
 		let lastNameErrorText = '';
 		let birthdayErrorText = '';
@@ -40,226 +40,230 @@ class Form extends Component {
 		let technologyStackErrorText = '';
 		let lastProjectDescErrorText = '';
 
-		if (this.state.name === '') {
-			nameErrorText = ERRORS.emptyField
-		} else if (this.state.name[0] !== this.state.name[0].toUpperCase()) {
+
+		if (!name) {
+			nameErrorText = ERRORS.emptyField;
+		} else if (name[0] !== name[0].toUpperCase()) {
 			nameErrorText = ERRORS.capitalLetter
 		}
 
-		if (this.state.lastName === '') {
-			lastNameErrorText = ERRORS.emptyField
-		} else if (this.state.lastName[0] !== this.state.lastName[0].toUpperCase()) {
+		if (!lastName) {
+			lastNameErrorText = ERRORS.emptyField;
+		} else if (name[0] !== name[0].toUpperCase()) {
 			lastNameErrorText = ERRORS.capitalLetter
 		}
 
-		if (this.state.birthday === '') {
-			birthdayErrorText = ERRORS.emptyField
+		if (!birthday) {
+			birthdayErrorText = ERRORS.emptyField;
 		}
 
-		if (this.state.phoneNumber === '') {
-			phoneNumberErrorText = ERRORS.emptyField
+		if (!phoneNumber) {
+			phoneNumberErrorText = ERRORS.emptyField;
 		}
 
 		const siteReg = /^https:\/\//;
-		if (this.state.site === '') {
+		if (!site) {
 			siteErrorText = ERRORS.emptyField;
-		} else if (siteReg.test(this.state.site) === false) {
+		} else if (siteReg.test(site) === false) {
 			siteErrorText = ERRORS.site;
 		}
 
-		if (this.state.personalInfo === '') {
+		if (!personalInfo) {
 			personalInfoErrorText = ERRORS.emptyField;
-		} else if (600 - this.state.personalInfo.length < 0) {
-			personalInfoErrorText = ERRORS.fieldLimit;
+		} else if (600 - personalInfo.length < 0) {
+			personalInfoErrorText = ERRORS.fieldLimit
 		}
 
-		if (this.state.technologyStack === '') {
+		if (!technologyStack) {
 			technologyStackErrorText = ERRORS.emptyField;
-		} else if (600 - this.state.technologyStack.length < 0) {
-			technologyStackErrorText = ERRORS.fieldLimit;
+		} else if (600 - technologyStack.length < 0) {
+			technologyStackErrorText = ERRORS.fieldLimit
 		}
 
-		if (this.state.lastProjectDesc === '') {
+		if (!lastProjectDesc) {
 			lastProjectDescErrorText = ERRORS.emptyField;
-		} else if (600 - this.state.lastProjectDesc.length < 0) {
-			lastProjectDescErrorText = ERRORS.fieldLimit;
+		} else if (600 - lastProjectDesc.length < 0) {
+			lastProjectDescErrorText = ERRORS.fieldLimit
 		}
 
 		if (nameErrorText || lastNameErrorText || birthdayErrorText || phoneNumberErrorText || siteErrorText || personalInfoErrorText || technologyStackErrorText || lastProjectDescErrorText) {
-			this.setState({
-				nameError: nameErrorText,
-				lastNameError: lastNameErrorText,
-				birthdayError: birthdayErrorText,
-				phoneNumberError: phoneNumberErrorText,
-				siteError: siteErrorText,
-				personalInfoError: personalInfoErrorText,
-				technologyStackError: technologyStackErrorText,
-				lastProjectDescError: lastProjectDescErrorText,
-			})
+			setNameError(nameErrorText);
+			setLastNameError(lastNameErrorText);
+			setBirtdayError(birthdayErrorText);
+			setPhoneNumberError(phoneNumberErrorText);
+			setSiteError(siteErrorText);
+			setPersonalInfoError(personalInfoErrorText);
+			setTechnologyStackError(technologyStackErrorText);
+			setLastProjectDescError(lastProjectDescErrorText)
+
 			return false;
 		} else {
-			this.setState({
-				nameError: '',
-				lastNameError: '',
-				birthdayError: '',
-				phoneNumberError: '',
-				siteError: '',
-				personalInfoError: '',
-				technologyStackError: '',
-				lastProjectDescError: '',
-			})
-			return true
+			setNameError('');
+			setLastNameError('');
+			setBirtdayError('');
+			setPhoneNumberError('');
+			setSiteError('');
+			setPersonalInfoError('');
+			setTechnologyStackError('');
+			setLastProjectDescError('');
+
+			return true;
 		}
 	}
 
-	formResetHandler = (event) => {
-		event.preventDefault();
-		this.setState({
-			name: '',
-			lastName: '',
-			birthday: '',
-			phoneNumber: '',
-			site: '',
-			personalInfo: '',
-			technologyStack: '',
-			lastProjectDesc: '',
-			submit: false,
-			nameError: '',
-			lastNameError: '',
-			birthdayError: '',
-			phoneNumberError: '',
-			siteError: '',
-			personalInfoError: '',
-			technologyStackError: '',
-			lastProjectDescError: ''
-		})
+	function formSubmitHandler(event) {
+		event.preventDefault()
+		setName(name.trim());
+		setLastName(lastName.trim());
+		setBirthday(birthday.trim());
+		setPhoneNumber(phoneNumber.trim());
+		setSite(site.trim());
+		setPersonalInfo(personalInfo.trim());
+		setTechnologyStack(technologyStack.trim());
+		setLastProjectDesc(lastProjectDesc.trim());
+		setSubmitted(true);
 	}
 
-	formInputHandler = (event) => {
-		this.setState({ [event.target.name]: event.target.value })
-	}
-
-	formSubmitHandler = (event) => {
-		event.preventDefault();
-		this.setState({
-			name: this.state.name.trim(),
-			lastName: this.state.lastName.trim(),
-			birthday: this.state.birthday.trim(),
-			phoneNumber: this.state.phoneNumber.trim(),
-			site: this.state.site.trim(),
-			personalInfo: this.state.personalInfo.trim(),
-			technologyStack: this.state.technologyStack.trim(),
-			lastProjectDesc: this.state.lastProjectDesc.trim(),
-		}, () => {
-			if (this.isValid()) {
-				this.setState({ submit: true })
-				console.log(this.state);
+	useEffect(() => {
+		if (submitted) {
+			if (isValid()) {
+				setIsFormValid(true);
 			}
-		})
-	}
-
-	phoneNumberMask = (event) => {
-		const maskForPhone = event.target.value
-			.replace(/\D/g, "")
-			.match(/(\d{0,1})(\d{0,4})(\d{0,2})(\d{0,2})/)
-			.slice(1, 5)
-			.filter((item) => item !== "")
-			.join("-");
-		this.setState({ [event.target.name]: maskForPhone });
-	}
-
-	render() {
-		if (!this.state.submit) {
-			return (
-				<form onSubmit={this.formSubmitHandler}>
-					<Input
-						title='Имя'
-						name="name"
-						value={this.state.name}
-						error={this.state.nameError}
-						change={this.formInputHandler}
-					/>
-					<Input
-						title='Фамилия'
-						name="lastName"
-						value={this.state.lastName}
-						error={this.state.lastNameError}
-						change={this.formInputHandler}
-					/>
-					<Input
-						title='Дата рождения'
-						type='date'
-						name="birthday"
-						value={this.state.birthday}
-						error={this.state.birthdayError}
-						change={this.formInputHandler}
-					/>
-					<Input
-						title='Телефон'
-						name="phoneNumber"
-						value={this.state.phoneNumber}
-						error={this.state.phoneNumberError}
-						change={this.phoneNumberMask}
-					/>
-					<Input
-						title='Сайт'
-						name="site"
-						value={this.state.site}
-						error={this.state.siteError}
-						change={this.formInputHandler}
-					/>
-					<Textarea
-						title='О себе'
-						name='personalInfo'
-						value={this.state.personalInfo}
-						error={this.state.personalInfoError}
-						change={this.formInputHandler}
-					/>
-					<Textarea
-						title='Стек технологий'
-						name='technologyStack'
-						value={this.state.technologyStack}
-						error={this.state.technologyStackError}
-						change={this.formInputHandler}
-					/>
-					<Textarea
-						title='Описание последнего проекта'
-						name='lastProjectDesc'
-						value={this.state.lastProjectDesc}
-						error={this.state.lastProjectDescError}
-						change={this.formInputHandler}
-					/>
-					<div className='buttons'>
-						<Button
-							type='submit'
-							name='submit'
-							content='Сохранить' />
-						<Button
-							type='reset'
-							name='reset'
-							content='Отмена'
-							clickHandler={this.formResetHandler} />
-					</div>
-				</form>
-			)
-		} else {
-			return (
-				<>
-					<FormResults
-						data={this.state}
-					/>
-					<div className='buttons'>
-						<Button
-							type='reset'
-							name='reset'
-							content='Отмена'
-							clickHandler={this.formResetHandler}
-						/>
-					</div>
-				</>
-			)
 		}
+		setSubmitted(false);
+	});
+
+	function formReset(event) {
+		event.preventDefault();
+		setName('');
+		setLastName('');
+		setBirthday('');
+		setPhoneNumber('');
+		setSite('');
+		setPersonalInfo('');
+		setTechnologyStack('');
+		setLastProjectDesc('');
+
+		setNameError('');
+		setLastNameError('');
+		setBirtdayError('');
+		setPhoneNumberError('');
+		setSiteError('');
+		setPersonalInfoError('');
+		setTechnologyStackError('');
+		setLastProjectDescError('');
+
+		setIsFormValid(false);
+	}
+
+	function phoneNumberMask(event) {
+		setPhoneNumber(
+			event.target.value
+				.replace(/\D/g, "")
+				.match(/(\d{0,1})(\d{0,4})(\d{0,2})(\d{0,2})/)
+				.slice(1, 5)
+				.filter((item) => item !== "")
+				.join("-")
+		);
+	}
+
+	if (!isFormValid) {
+		return (
+			<form onSubmit={formSubmitHandler}>
+				<Input
+					title='Имя'
+					name='name'
+					value={name}
+					onChangeHandler={(event) => setName(event.target.value)}
+					error={nameError}
+				/>
+				<Input
+					title='Фамилия'
+					name='lastName'
+					value={lastName}
+					onChangeHandler={(event) => setLastName(event.target.value)}
+					error={lastNameError}
+				/>
+				<Input
+					title='Дата рождения'
+					type='date'
+					name='birthday'
+					value={birthday}
+					onChangeHandler={(event) => setBirthday(event.target.value)}
+					error={birtdayError}
+				/>
+				<Input
+					title='Телефон'
+					name='phoneNumber'
+					value={phoneNumber}
+					onChangeHandler={phoneNumberMask}
+					error={phoneNumberError}
+				/>
+				<Input
+					title='Сайт'
+					name='site'
+					value={site}
+					onChangeHandler={(event) => setSite(event.target.value)}
+					error={siteError}
+				/>
+				<Textarea
+					title='О себе'
+					name='personalInfo'
+					value={personalInfo}
+					onChangeHandler={(event) => setPersonalInfo(event.target.value)}
+					error={personalInfoError}
+				/>
+				<Textarea
+					title='Стек технологий'
+					name='technologyStack'
+					value={technologyStack}
+					onChangeHandler={(event) => setTechnologyStack(event.target.value)}
+					error={technologyStackError}
+				/>
+				<Textarea
+					title='Описание последнего проекта'
+					name='lastProjectDesc'
+					value={lastProjectDesc}
+					onChangeHandler={(event) => setLastProjectDesc(event.target.value)}
+					error={lastProjectDescError}
+				/>
+				<div className="buttons">
+					<Button
+						type='submit'
+						name='submit'
+						content='Сохранить'
+					/>
+					<Button
+						type='reset'
+						name='reset'
+						content='Отмена'
+						onClickHandler={formReset}
+					/>
+				</div>
+			</form>
+		)
+	} else {
+		return (
+			<div>
+				<FormResults
+					name={name}
+					lastName={lastName}
+					birthday={birthday}
+					phoneNumber={phoneNumber}
+					site={site}
+					personalInfo={personalInfo}
+					technologyStack={technologyStack}
+					lastProjectDesc={lastProjectDesc}
+				/>
+				<div className="buttons">
+					<Button
+						type='reset'
+						name='reset'
+						content='Отмена'
+						onClickHandler={formReset}
+					/>
+				</div>
+			</div>
+		)
 	}
 }
-
-export default Form;  

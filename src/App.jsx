@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
-import styles from './App.css'
+import React from 'react';
 import Form from './components/Form';
+import './App.css';
 
-class App extends Component {
-	render() {
-		return (
-			<div className="container">
-				<h1>Создание анкеты</h1>
-				<Form />
-			</div>
-		);
-	}
+function App() {
+	return (
+		<div className="container">
+			<h1>Создание анкеты</h1>
+			<Form />
+		</div>
+	);
 }
 
 export default App;

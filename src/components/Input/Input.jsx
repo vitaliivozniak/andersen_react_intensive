@@ -1,28 +1,18 @@
-import React, { Component } from 'react';
-import styles from './Input.module.css';
+import React from 'react';
+import './Input.css';
 
-
-
-class Input extends Component {
-	constructor(props) {
-		super(props);
-	}
-
-	render() {
-		return (
-			<label>
-				{this.props.title}
-				<input
-					type={this.props.type || "text"}
-					name={this.props.name}
-					value={this.props.value}
-					placeholder={this.props.title}
-					onChange={this.props.change}
-				/>
-				<div className='error'>{this.props.error}</div>
-			</label>
-		)
-	}
+export default function Input(props) {
+	return (
+		<label>
+			{props.title}
+			<input
+				type={props.type || 'text'}
+				placeholder={props.title}
+				name={props.name}
+				value={props.value}
+				onChange={props.onChangeHandler}
+			/>
+			<div className='error'>{props.error}</div>
+		</label>
+	)
 }
-
-export default Input;

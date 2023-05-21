@@ -1,42 +1,38 @@
-import React, { Component } from 'react';
-import styles from './FormResults.module.css';
+import React from 'react';
+import './FormResults.css';
 
-export default class FormResults extends Component {
-	constructor(props) {
-		super(props);
-	}
+export default function FormResults(props) {
 
-	render() {
-		return (
-			<div>
-				<h2>{this.props.data.name} {this.props.data.lastName}</h2>
-				<ul className={styles.data_list}>
-					<li>
-						<span className={styles.data_list_title}>Дата рождения:</span>
-						<p>{this.props.data.birthday}</p>
-					</li>
-					<li>
-						<span className={styles.data_list_title}>Телефон:</span>
-						<p>{this.props.data.phoneNumber}</p>
-					</li>
-					<li>
-						<span className={styles.data_list_title}>Сайт: </span>
-						<p>{this.props.data.site}</p>
-					</li>
-					<li>
-						<span className={styles.data_list_title}>О себе: </span>
-						<p>{this.props.data.personalInfo}</p>
-					</li>
-					<li>
-						<span className={styles.data_list_title}>Стек технологий: </span>
-						<p>{this.props.data.technologyStack}</p>
-					</li>
-					<li>
-						<span className={styles.data_list_title}>Описание последнего проекта:</span>
-						<p>{this.props.data.lastProjectDesc}</p>
-					</li>
-				</ul>
-			</div>
-		)
-	}
+
+	return (
+		<div className='cont'>
+			<h2>{props.name} {props.lastName}</h2>
+			<ul className='data-list'>
+				<li>
+					<span className='data-list-title'>Дата рождения:</span>
+					<p>{props.birthday}</p>
+				</li>
+				<li>
+					<span className='data-list-title'>Телефон:</span>
+					<p>{props.phoneNumber}</p>
+				</li>
+				<li>
+					<span className='data-list-title'>Сайт:</span>
+					<p>{props.site}</p>
+				</li>
+				<li>
+					<span className='data-list-title'>О себе:</span>
+					<p>{props.personalInfo}</p>
+				</li>
+				<li>
+					<span className='data-list-title'>Стек технологий:</span>
+					<p>{props.technologyStack}</p>
+				</li>
+				<li>
+					<span className='data-list-title'>Описание последнего проекта:</span>
+					<p>{props.lastProjectDesc}</p>
+				</li>
+			</ul>
+		</div>
+	)
 }
